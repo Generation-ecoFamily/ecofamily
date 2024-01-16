@@ -23,5 +23,4 @@ public class Categoria {
 
     @NotNull
     private boolean perecivel;
-
 }
