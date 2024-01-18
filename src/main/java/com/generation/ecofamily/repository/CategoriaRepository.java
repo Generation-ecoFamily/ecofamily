@@ -11,6 +11,6 @@ import com.generation.ecofamily.model.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 	
-	public List<Categoria> findAllByPerecivel(@Param("perecivel") Boolean perecivel);
+	public List<Categoria> findAllByPerecivel(@Param("perecivel") boolean perecivel);
 	
 }
