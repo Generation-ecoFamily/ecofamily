@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import com.generation.ecofamily.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +33,15 @@ public class ProdutoController {
     @Autowired
     ProdutoRepository produtoRepository;
 
+    @Autowired
+    CategoriaRepository categoriaRepository;
+
     @PostMapping
     public ResponseEntity<Produto> createProduto(@Valid @RequestBody Produto produto) {
-        return ResponseEntity.status(HttpStatus.CREATED)
+        if(categoriaRepository.existsById(produto.getCategoria().getId()))
+             return ResponseEntity.status(HttpStatus.CREATED)
                 .body(produtoRepository.save(produto));
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Categoria Inválida", null);
     }
 
     @GetMapping
@@ -60,12 +66,22 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoRepository.findAllByPrecoGreaterThanEqual(preco));
     }
 
+    @GetMapping("/precoMenorIgual/{preco}")
+    ResponseEntity<List<Produto>> findAllByPrecoLessThanEqual(@PathVariable BigDecimal preco) {
+        return ResponseEntity.ok(produtoRepository.findAllByPrecoLessThanEqual(preco));
+    }
+
     @PutMapping
-    public ResponseEntity<Produto> updateProduto(@Valid @RequestBody Produto produto) {
-        return produtoRepository.findById(produto.getId())
-                .map(response -> ResponseEntity.status(HttpStatus.OK)
-                        .body(produtoRepository.save(produto)))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    public ResponseEntity<Produto> updateProduto(@Valid @RequestBody Produto produto){
+        if(produtoRepository.existsById(produto.getCategoria().getId())) {
+            if(categoriaRepository.existsById(produto.getCategoria().getId()))
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(produtoRepository.save(produto));
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Categoria Inválida!", null);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
