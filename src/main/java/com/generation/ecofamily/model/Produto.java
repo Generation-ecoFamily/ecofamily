@@ -21,7 +21,6 @@ import lombok.Setter;
 @Table(name = "tb_produtos")
 @Getter
 @Setter
-
 public class Produto {
 	
 	@Id
@@ -35,18 +34,14 @@ public class Produto {
 	private String descricao;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
-    @NotNull(message = "O preço é obrigatório.")
-    @Positive(message = "O preço deve ser maior que zero.")
+	@NotNull(message = "O preço é obrigatório.")
+	@Positive(message = "O preço deve ser maior que zero.")
 	private BigDecimal preco;
 	
 	@NotNull(message = "A quantidade é obrigatória.")
-    @PositiveOrZero(message = "A quantidade deve ser igual ou maior que zero.")
-    private Integer quantidade;
+	@PositiveOrZero(message = "A quantidade deve ser igual ou maior que zero.")
+	private Integer quantidade;
 	
 	private String foto;
 	
-	
-	
-	
-
 }
