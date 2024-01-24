@@ -37,14 +37,13 @@ public class UsuarioController {
         return usuarioService.autenticarUsuario(usuarioLogin).map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
-
-    /*@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Usuario> findById(@PathVariable Long id) {
         return usuarioRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    */
+
     @PostMapping("/cadastrar")
     public ResponseEntity<Usuario> postUsuario(@RequestBody @Valid Usuario usuario) {
         return usuarioService.cadastrarUsuario(usuario)
