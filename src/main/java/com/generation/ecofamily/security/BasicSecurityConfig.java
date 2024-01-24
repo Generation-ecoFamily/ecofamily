@@ -47,7 +47,7 @@ public class BasicSecurityConfig {
 
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-        throws Exception {
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -61,6 +61,7 @@ public class BasicSecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/usuarios/login").permitAll()
                         .requestMatchers("/usuarios/cadastrar").permitAll()
+                        .requestMatchers("/produtos").permitAll()
                         .requestMatchers("/error/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
                         .anyRequest().authenticated())
