@@ -50,5 +50,9 @@ public class Produto {
 	@JsonIgnoreProperties("produtos")
 	private Categoria categoria;
 
+	@ManyToOne
+	@JsonIgnoreProperties("produtos")
+	private Usuario usuario;
+
 	
 }
