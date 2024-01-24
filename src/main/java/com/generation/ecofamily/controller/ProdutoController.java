@@ -73,7 +73,7 @@ public class ProdutoController {
 
     @PutMapping
     public ResponseEntity<Produto> updateProduto(@Valid @RequestBody Produto produto){
-        if(produtoRepository.existsById(produto.getCategoria().getId())) {
+        if(produtoRepository.existsById(produto.getId())) {
             if(categoriaRepository.existsById(produto.getCategoria().getId()))
                 return ResponseEntity.status(HttpStatus.OK)
                         .body(produtoRepository.save(produto));
