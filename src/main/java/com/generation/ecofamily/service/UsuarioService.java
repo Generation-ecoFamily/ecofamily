@@ -50,6 +50,7 @@ public class UsuarioService {
             return Optional.ofNullable(usuarioRepository.save(usuario));
         }
         return Optional.empty();
+
     }
 
     public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
