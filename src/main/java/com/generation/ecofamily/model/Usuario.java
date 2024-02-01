@@ -1,6 +1,8 @@
 package com.generation.ecofamily.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -30,6 +32,7 @@ public class Usuario {
 	@Size(min = 3, message = "O sobrenome deve ter no mínimo 3 caracteres ")
 	private String sobrenome;
 
+	@Schema(example = "email@email.com.br")
 	@NotBlank(message = "O email é obrigatório.")
 	private String email;
 
