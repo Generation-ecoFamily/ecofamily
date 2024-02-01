@@ -1,6 +1,8 @@
 package com.generation.ecofamily.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -17,27 +19,28 @@ import java.util.List;
 @Getter
 @Setter
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "O nome é obrigatório.")
 	@Size(min = 3, message = "O nome deve ter no mínimo 3 caracteres ")
 	private String nome;
-	
+
 	@NotBlank(message = "O sobrenome é obrigatório.")
 	@Size(min = 3, message = "O sobrenome deve ter no mínimo 3 caracteres ")
 	private String sobrenome;
-	
+
+	@Schema(example = "email@email.com.br")
 	@NotBlank(message = "O email é obrigatório.")
 	private String email;
-	
+
 	@NotBlank(message = "A senha é obrigatória.")
 	private String senha;
-	
+
 	private String foto;
-	
+
 	@NotNull(message = "O tipo é obrigatório")
 	@Min(0)
 	@Max(1)
@@ -46,5 +49,19 @@ public class Usuario {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Produto> produtos;
+
+	public Usuario(Long id, String nome, String sobrenome, String email, String senha, String foto, int tipo) {
+		this.id = id;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.email = email;
+		this.senha = senha;
+		this.foto = foto;
+		this.tipo = tipo;
+	}
+
+	public Usuario() {
+
+	}
 
 }
