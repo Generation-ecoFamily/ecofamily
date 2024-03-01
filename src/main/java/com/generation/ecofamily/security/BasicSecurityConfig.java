@@ -60,6 +60,7 @@ public class BasicSecurityConfig {
                 .cors(withDefaults());
         http
                 .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/usuarios").permitAll()
                         .requestMatchers("/usuarios/cadastrar").permitAll()
                         .requestMatchers("/usuarios/login").permitAll()
                         .requestMatchers("/produtos").permitAll()
