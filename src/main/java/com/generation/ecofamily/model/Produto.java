@@ -17,7 +17,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,6 +27,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "tb_produtos")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Produto {
 	
 	@Id
@@ -59,5 +63,13 @@ public class Produto {
 	@UpdateTimestamp
 	private LocalDateTime data;
 
-	
+	public Produto(String nome, String descricao, BigDecimal preco, Integer quantidade, String foto, Categoria categoria, Usuario usuario) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.quantidade = quantidade;
+		this.foto = foto;
+		this.categoria = categoria;
+		this.usuario = usuario;
+	}
 }

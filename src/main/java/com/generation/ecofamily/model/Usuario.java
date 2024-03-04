@@ -28,8 +28,6 @@ public class Usuario {
 	@Size(min = 3, message = "O nome deve ter no mínimo 3 caracteres ")
 	private String nome;
 
-	@NotBlank(message = "O sobrenome é obrigatório.")
-	@Size(min = 3, message = "O sobrenome deve ter no mínimo 3 caracteres ")
 	private String sobrenome;
 
 	@Schema(example = "email@email.com.br")
