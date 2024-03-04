@@ -1,6 +1,7 @@
 package com.generation.ecofamily.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,6 +19,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "tb_produtos")
@@ -53,6 +55,9 @@ public class Produto {
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
 	private Usuario usuario;
+
+	@UpdateTimestamp
+	private LocalDateTime data;
 
 	
 }
