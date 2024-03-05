@@ -9,8 +9,10 @@ public class UsuarioLogin {
 
     private Long id;
     private String nome;
+    private String sobrenome;
     private String email;
     private String senha;
     private String foto;
+    private int tipo;
     private String token;
 }
